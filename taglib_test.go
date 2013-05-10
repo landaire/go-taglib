@@ -92,4 +92,17 @@ func TestTagLib(t *testing.T) {
 	if channels := file.Channels(); channels != 2 {
 		t.Errorf("Got wrong channels: %d", channels)
 	}
+
+	// Test writing
+	file.SetTitle("TEST")
+	file.Save()
+	if title := file.Title(); title != "TEST" {
+		t.Errorf("Got the wrong title: %s (expecting %s)", title, "TEST")
+	}
+	// Test writing the title name back
+	file.SetTitle("The Title")
+	file.Save()
+	if title := file.Title(); title != "The Title" {
+		t.Errorf("Got the wrong title: %s (expecting %s", title, "The Title")
+	}
 }
