@@ -21,7 +21,7 @@ in order to compile go-taglib.
 Install
 -------
 
-    go get github.com/wtolson/go-taglib
+    go get github.com/landr0id/go-taglib
 
 Documentation
 -------------
