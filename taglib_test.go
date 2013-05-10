@@ -96,13 +96,32 @@ func TestTagLib(t *testing.T) {
 	// Test writing
 	file.SetTitle("TEST")
 	file.Save()
+
 	if title := file.Title(); title != "TEST" {
 		t.Errorf("Got the wrong title: %s (expecting %s)", title, "TEST")
 	}
+
 	// Test writing the title name back
 	file.SetTitle("The Title")
 	file.Save()
+
 	if title := file.Title(); title != "The Title" {
-		t.Errorf("Got the wrong title: %s (expecting %s", title, "The Title")
+		t.Errorf("Got the wrong title when reverting change: %s (expecting %s", title, "The Title")
+	}
+
+	// Test setting the artist
+	file.SetArtist("Test Artist")
+	file.Save()
+
+	if artist := file.Artist(); artist != "Test Artist" {
+		t.Errorf("Got the wrong artist: %s (expecting %s)", artist, "Test Artist")
+	}
+
+	// Test writing back the original artist name
+	file.SetArtist("The Artist")
+	file.Save()
+
+	if artist := file.Artist(); artist != "The Artist" {
+		t.Errorf("Got the wrong artist when reverting change: %s (expecting %s)", artist, "The Artist")
 	}
 }
