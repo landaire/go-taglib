@@ -73,6 +73,14 @@ func (file *File) Title() string {
 	return convertAndFree(C.taglib_tag_title(file.tag))
 }
 
+// Sets the tag's title string
+func (file *File) SetTitle(title string) {
+	glock.Lock()
+	defer glock.Unlock()
+
+	C.taglib_tag_set_title(file.tag, C.CString(title))
+}
+
 // Returns a string with this tag's artist.
 func (file *File) Artist() string {
 	glock.Lock()
@@ -152,6 +160,14 @@ func (file *File) Channels() int {
 	defer glock.Unlock()
 
 	return int(C.taglib_audioproperties_channels(file.props))
+}
+
+// Saves the file
+func (file *File) Save() {
+	glock.Lock()
+	defer glock.Unlock()
+
+	C.taglib_file_save(file.fp)
 }
 
 func init() {
