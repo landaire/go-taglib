@@ -74,6 +74,7 @@ func (file *File) Title() string {
 }
 
 // Sets the tag's title string
+// don't forget to call the "Save" method
 func (file *File) SetTitle(title string) {
 	glock.Lock()
 	defer glock.Unlock()
@@ -87,6 +88,15 @@ func (file *File) Artist() string {
 	defer glock.Unlock()
 
 	return convertAndFree(C.taglib_tag_artist(file.tag))
+}
+
+// Sets the tag's artist string
+// don't forget to call the "Save" method
+func (file *File) SetArtist(artist string) {
+	glock.Lock()
+	defer glock.Unlock()
+
+	C.taglib_tag_set_artist(file.tag, C.CString(artist))
 }
 
 // Returns a string with this tag's album name.
