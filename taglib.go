@@ -172,7 +172,7 @@ func (file *File) Channels() int {
 	return int(C.taglib_audioproperties_channels(file.props))
 }
 
-// Saves the file
+// Saves any changes to the file file (such as title or artist)
 func (file *File) Save() {
 	glock.Lock()
 	defer glock.Unlock()
