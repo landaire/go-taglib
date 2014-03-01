@@ -50,6 +50,10 @@ func (file *File) Close() {
 	glock.Lock()
 	defer glock.Unlock()
 
+	if file.fp == nil {
+		return
+	}
+
 	C.taglib_file_free(file.fp)
 	file.fp = nil
 	file.tag = nil
